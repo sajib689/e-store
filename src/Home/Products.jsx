@@ -19,7 +19,7 @@ const Products = () => {
   console.log(data);
   return (
     <div className="bg-base-200 font-serif ">
-      <div className="container mx-auto pt-12">
+      <div className="container mx-auto pt-12 pb-24">
         <h1 className="text-5xl text-center font-bold">Featured Products</h1>
         <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-3 gap-6 mt-24">
           {data.map((product) => (

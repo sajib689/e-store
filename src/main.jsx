@@ -4,14 +4,17 @@ import { RouterProvider } from "react-router-dom";
 import Main from "./Main/Main";
 import router from "./Routes/router";
 import {
+  QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+
+// Create a QueryClient instance
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
-  <>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}>
-        <Main />
-      </RouterProvider>
-    </QueryClientProvider>
-  </>
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router}>
+      <Main />
+    </RouterProvider>
+  </QueryClientProvider>
 );

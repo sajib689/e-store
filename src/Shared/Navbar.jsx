@@ -4,21 +4,21 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link to='/'>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to='/'>Shop</Link>
+        <Link to="/">Shop</Link>
       </li>
       <li>
-        <Link to='/'>About Us</Link>
+        <Link to="/">About Us</Link>
       </li>
       <li>
-        <Link to='/'>Contact Us</Link>
+        <Link to="/">Contact Us</Link>
       </li>
     </>
   );
   return (
-    <div>
+    <div className="bg-base-200">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -50,9 +50,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
           <Link className="btn">Login</Link>

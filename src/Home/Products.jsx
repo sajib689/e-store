@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import ProductsCard from "../Components/ProductsCard";
 
 const Products = () => {
   const { data, isLoading, error } = useQuery({
@@ -15,17 +16,17 @@ const Products = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-console.log(data)
+  console.log(data);
   return (
-    <div>
-      <h1>Products</h1>
-      <ul>
-        {data.map((product, index) => (
-          <li key={index}>
-            {product.productName} - ${product.price}
-          </li>
-        ))}
-      </ul>
+    <div className="bg-base-200 font-serif ">
+      <div className="container mx-auto pt-12">
+        <h1 className="text-5xl text-center font-bold">Featured Products</h1>
+        <div>
+          {data.map((product) => (
+            <ProductsCard key={product._id} product={product}></ProductsCard>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

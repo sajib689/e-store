@@ -21,7 +21,7 @@ const Products = () => {
     <div className="bg-base-200 font-serif ">
       <div className="container mx-auto pt-12">
         <h1 className="text-5xl text-center font-bold">Featured Products</h1>
-        <div>
+        <div className="grid grid-cols md:grid-cols-3 lg:grid-cols-4 gap-6">
           {data.map((product) => (
             <ProductsCard key={product._id} product={product}></ProductsCard>
           ))}

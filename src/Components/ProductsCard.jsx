@@ -1,6 +1,7 @@
 
 
-const ProductsCard = () => {
+const ProductsCard = ({product}) => {
+    console.log(product)
     return (
         <div>
             

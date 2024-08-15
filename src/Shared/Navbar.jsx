@@ -6,6 +6,15 @@ const Navbar = () => {
       <li>
         <Link to='/'>Home</Link>
       </li>
+      <li>
+        <Link to='/'>Shop</Link>
+      </li>
+      <li>
+        <Link to='/'>About Us</Link>
+      </li>
+      <li>
+        <Link to='/'>Contact Us</Link>
+      </li>
     </>
   );
   return (

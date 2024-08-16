@@ -64,7 +64,7 @@ const Products = () => {
         <h1 className="text-5xl text-center font-bold">Featured Products</h1>
         
         {/* Search, Filter, and Sort Options */}
-        <div className="flex justify-between items-center mt-8">
+        <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center mt-8">
           <input
             type="text"
             placeholder="Search products..."

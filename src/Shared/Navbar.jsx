@@ -1,6 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user,
+    createUser,
+    createUserGoogle,
+    userLogin,
+    userSignOut} = useContext(AuthContext)
   const openModal = () => {
     document.getElementById('sign_up_modal').showModal();
   };

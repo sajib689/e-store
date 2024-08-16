@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 
 const Navbar = () => {
   const { user, createUser, createUserGoogle, userLogin, userSignOut } =
     useContext(AuthContext);
+
   const openModal = () => {
     document.getElementById("sign_up_modal").showModal();
   };
@@ -14,18 +14,26 @@ const Navbar = () => {
   const closeModal = () => {
     document.getElementById("sign_up_modal").close();
   };
+
+  const openModal2 = () => {
+    document.getElementById("sign_in_modal").showModal(); // Unique ID
+  };
+
+  const closeModal2 = () => {
+    document.getElementById("sign_in_modal").close(); // Unique ID
+  };
+
   const handlerCreateUser = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const user = { name, email, password };
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         if (user) {
-          toast.success("Successfully Sign Up");
+          toast.success("Successfully Signed Up");
         }
         form.reset();
         closeModal();
@@ -36,6 +44,24 @@ const Navbar = () => {
         }
       });
   };
+  const handleLogin = e => {
+    e.preventDefault();
+    const form = e.target
+    const email = form.email.value 
+    const password = form.password.value
+    userLogin(email, password)
+    .then( result => {
+      const user = result.user
+      if (user) {
+        toast.success("Successfully Signed In");
+      }
+    })
+    .catch(err => {
+      if (err) {
+        toast.error(`${err.message}`);
+      }
+    })
+  }
   const links = (
     <>
       <li>
@@ -52,6 +78,7 @@ const Navbar = () => {
       </li>
     </>
   );
+
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
@@ -87,23 +114,36 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/">
-              <img className="w-24 h-24" src="./logo.png" alt="" />
+              <img className="w-24 h-24" src="./logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu font-bold menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
+            {
+              user ? 
+              <button className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Sign Out</button>
+              :
+              <>
+              <button
+              onClick={openModal2}
+              className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
+            >
+              Sign In
+            </button>
             <button
               onClick={openModal}
               className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
             >
-              Login
+              Sign Up
             </button>
+              </>
+            }
           </div>
         </div>
       </div>
-      {/* modal area */}
+      {/* Sign Up Modal */}
       <dialog id="sign_up_modal" className="modal">
         <div className="modal-box">
           <button
@@ -159,6 +199,54 @@ const Navbar = () => {
                 className="btn text-white bg-[#0F42AB] hover:bg-[#0F42AB]"
               >
                 Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      {/* Sign In Modal */}
+      <dialog id="sign_in_modal" className="modal">
+        <div className="modal-box">
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            onClick={closeModal2}
+          >
+            ✕
+          </button>
+          <h3 className="font-bold text-lg">Sign In</h3>
+          <form onSubmit={handleLogin} className="py-4" method="dialog">
+            <div className="form-control mt-4">
+              <label htmlFor="email" className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                name="email"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control mt-4">
+              <label htmlFor="password" className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                name="password"
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control mt-4">
+              <button
+                type="submit"
+                className="btn text-white bg-[#0F42AB] hover:bg-[#0F42AB]"
+              >
+                Sign In
               </button>
             </div>
           </form>

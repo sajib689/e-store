@@ -15,6 +15,37 @@ const Navbar = () => {
   const closeModal = () => {
     document.getElementById('sign_up_modal').close();
   };
+  const handlerCreateUser = e => {
+    e.preventDefault()
+    const form = e.target
+    const name = form.name.value
+    const email = form.email.value
+    const password = form.password.value
+    const user = {name, email, password}
+    createUser(email, password)
+    .then( result => {
+      const user = result.user
+      if(user){
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Sign Up Success!",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(err => {
+      if(err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err.message}`,
+          
+        });
+      }
+    })
+  }
   const links = (
     <>
       <li>
@@ -78,24 +109,24 @@ const Navbar = () => {
         <div className="modal-box">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
           <h3 className="font-bold text-lg">Sign Up</h3>
-          <form className="py-4" method="dialog">
+          <form onSubmit={handlerCreateUser} className="py-4" method="dialog">
             <div className="form-control">
               <label htmlFor="username" className="label">
                 <span className="label-text">Username</span>
               </label>
-              <input id="username" type="text" placeholder="Enter your username" className="input input-bordered" required />
+              <input name="name" id="username" type="text" placeholder="Enter your username" className="input input-bordered" required />
             </div>
             <div className="form-control mt-4">
               <label htmlFor="email" className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input id="email" type="email" placeholder="Enter your email" className="input input-bordered" required />
+              <input name="email" id="email" type="email" placeholder="Enter your email" className="input input-bordered" required />
             </div>
             <div className="form-control mt-4">
               <label htmlFor="password" className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input id="password" type="password" placeholder="Enter your password" className="input input-bordered" required />
+              <input name="password" id="password" type="password" placeholder="Enter your password" className="input input-bordered" required />
             </div>
             <div className="form-control mt-4">
               <button type="submit" className="btn text-white bg-[#0F42AB] hover:bg-[#0F42AB]">Sign Up</button>

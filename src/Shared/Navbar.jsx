@@ -62,6 +62,12 @@ const Navbar = () => {
       }
     })
   }
+  const logOut = () => {
+    userSignOut()
+    .then( () => {
+      toast.success("Successfully Signed Out");
+    })
+  }
   const links = (
     <>
       <li>
@@ -123,7 +129,7 @@ const Navbar = () => {
           <div className="navbar-end">
             {
               user ? 
-              <button className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Sign Out</button>
+              <button onClick={logOut} className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Sign Out</button>
               :
               <>
               <button

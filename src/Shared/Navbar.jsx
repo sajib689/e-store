@@ -55,6 +55,8 @@ const Navbar = () => {
       if (user) {
         toast.success("Successfully Signed In");
       }
+      form.reset();
+        closeModal2();
     })
     .catch(err => {
       if (err) {

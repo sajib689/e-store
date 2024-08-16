@@ -37,7 +37,7 @@ const ProductsCard = ({ product }) => {
               size={24}
               activeColor="#ffd700"
             />
-            ,
+            
           </div>
 
           <div className="flex justify-between mt-3 items-center">

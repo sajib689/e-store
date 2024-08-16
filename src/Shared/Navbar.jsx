@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const openModal = () => {
+    document.getElementById('sign_up_modal').showModal();
+  };
+
+  const closeModal = () => {
+    document.getElementById('sign_up_modal').close();
+  };
   const links = (
     <>
       <li>
@@ -16,8 +23,10 @@ const Navbar = () => {
         <Link to="/">Contact Us</Link>
       </li>
     </>
+    
   );
   return (
+   <>
     <div className="bg-base-200 font-serif">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
@@ -53,10 +62,41 @@ const Navbar = () => {
           <ul className="menu font-bold menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Login</Link>
+          <button  onClick={openModal} className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Login</button>
         </div>
       </div>
     </div>
+{/* modal area */}
+    <dialog id="sign_up_modal" className="modal">
+        <div className="modal-box">
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
+          <h3 className="font-bold text-lg">Sign Up</h3>
+          <form className="py-4" method="dialog">
+            <div className="form-control">
+              <label htmlFor="username" className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input id="username" type="text" placeholder="Enter your username" className="input input-bordered" required />
+            </div>
+            <div className="form-control mt-4">
+              <label htmlFor="email" className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input id="email" type="email" placeholder="Enter your email" className="input input-bordered" required />
+            </div>
+            <div className="form-control mt-4">
+              <label htmlFor="password" className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input id="password" type="password" placeholder="Enter your password" className="input input-bordered" required />
+            </div>
+            <div className="form-control mt-4">
+              <button type="submit" className="btn text-white bg-[#0F42AB] hover:bg-[#0F42AB]">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+   </>
   );
 };
 

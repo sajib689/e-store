@@ -25,7 +25,7 @@ const Footer = () => {
       </footer>
       <footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
         <aside className="grid-flow-col items-center">
-          <img src="https://i.ibb.co/QMLnH7g/logo.png" alt="" />
+          <img className="w-24 h-24" src="https://i.ibb.co/QMLnH7g/logo.png" alt="" />
           <p>
             E-store.
             <br />

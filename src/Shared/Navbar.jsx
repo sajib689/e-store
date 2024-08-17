@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 
 const Navbar = () => {
   const { user, createUser, createUserGoogle, userLogin, userSignOut } =
@@ -64,6 +65,21 @@ const Navbar = () => {
       }
     })
   }
+  const handleGoogleLogin = () => {
+    createUserGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log('Google Sign-In successful:', user);
+        toast.success("Successfully Signed In with Google");
+        closeModal2();
+        closeModal();
+      })
+      .catch((err) => {
+        console.error('Google Sign-In error:', err);
+        toast.error(`Google Sign-In failed: ${err.message}`);
+      });
+  };
+  
   const logOut = () => {
     userSignOut()
     .then( () => {
@@ -210,6 +226,13 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+          <button
+  className="btn btn-primary flex justify-center items-center mt-4"
+  onClick={handleGoogleLogin}
+>
+  <FcGoogle className="mr-2" /> Sign in with Google
+</button>
+
         </div>
       </dialog>
       {/* Sign In Modal */}
@@ -258,6 +281,13 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+          <button
+  className="btn btn-primary flex justify-center items-center mt-4"
+  onClick={handleGoogleLogin}
+>
+  <FcGoogle className="mr-2" /> Sign in with Google
+</button>
+
         </div>
       </dialog>
     </>

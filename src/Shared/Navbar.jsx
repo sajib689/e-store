@@ -45,47 +45,46 @@ const Navbar = () => {
         }
       });
   };
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    const form = e.target
-    const email = form.email.value 
-    const password = form.password.value
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
     userLogin(email, password)
-    .then( result => {
-      const user = result.user
-      if (user) {
-        toast.success("Successfully Signed In");
-      }
-      form.reset();
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          toast.success("Successfully Signed In");
+        }
+        form.reset();
         closeModal2();
-    })
-    .catch(err => {
-      if (err) {
-        toast.error(`${err.message}`);
-      }
-    })
-  }
+      })
+      .catch((err) => {
+        if (err) {
+          toast.error(`${err.message}`);
+        }
+      });
+  };
   const handleGoogleLogin = () => {
     createUserGoogle()
       .then((result) => {
         const user = result.user;
-        console.log('Google Sign-In successful:', user);
+        console.log("Google Sign-In successful:", user);
         toast.success("Successfully Signed In with Google");
-        closeModal2();
-        closeModal();
+        // closeModal2();
+        // closeModal();
       })
       .catch((err) => {
-        console.error('Google Sign-In error:', err);
+        console.error("Google Sign-In error:", err);
         toast.error(`Google Sign-In failed: ${err.message}`);
       });
   };
-  
+
   const logOut = () => {
-    userSignOut()
-    .then( () => {
+    userSignOut().then(() => {
       toast.success("Successfully Signed Out");
-    })
-  }
+    });
+  };
   const links = (
     <>
       <li>
@@ -145,25 +144,29 @@ const Navbar = () => {
             <ul className="menu font-bold menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            {
-              user ? 
-              <button onClick={logOut} className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]">Sign Out</button>
-              :
-              <>
+            {user ? (
               <button
-              onClick={openModal2}
-              className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
-            >
-              Sign In
-            </button>
-            <button
-              onClick={openModal}
-              className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
-            >
-              Sign Up
-            </button>
+                onClick={logOut}
+                className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={openModal2}
+                  className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={openModal}
+                  className="bg-[#0F42AB] text-white btn transition-all hover:bg-[#0e4ed0]"
+                >
+                  Sign Up
+                </button>
               </>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -226,13 +229,15 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+          <div className="flex justify-center items-center">
           <button
-  className="btn btn-primary flex justify-center items-center mt-4"
-  onClick={handleGoogleLogin}
->
-  <FcGoogle className="mr-2" /> Sign in with Google
-</button>
-
+            className="btn btn-primary  mt-4"
+            onClick={handleGoogleLogin}
+          >
+            <FcGoogle className="mr-2" /> Sign in with Google
+          </button>
+          <p></p>
+          </div>
         </div>
       </dialog>
       {/* Sign In Modal */}
@@ -281,13 +286,15 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+          <div className="flex justify-center items-center">
           <button
-  className="btn btn-primary flex justify-center items-center mt-4"
-  onClick={handleGoogleLogin}
->
-  <FcGoogle className="mr-2" /> Sign in with Google
-</button>
-
+            className="btn btn-primary  mt-4"
+            onClick={handleGoogleLogin}
+          >
+            <FcGoogle className="mr-2" /> Sign in with Google
+          </button>
+          <p></p>
+          </div>
         </div>
       </dialog>
     </>

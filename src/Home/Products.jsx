@@ -21,7 +21,7 @@ const Products = () => {
       category,
       price
     }).toString();
-    const response = await fetch(`http://localhost:8000/products?${query}`);
+    const response = await fetch(`https://e-commerce-server-sepia.vercel.app/products?${query}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
